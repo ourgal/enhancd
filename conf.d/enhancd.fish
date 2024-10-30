@@ -1,9 +1,11 @@
 function __enhancd_install --on-event enhancd_install
     set -l root (string join / (status filename | string split /)[1..-3])
+    echo $root
 
-    set -Ux ENHANCD_ROOT "$root/functions/enhancd"
+    set -Ux ENHANCD_ROOT "$root/vendor_functions.d/enhancd"
+    echo $ENHANCD_ROOT
     set -Ux ENHANCD_DIR "$HOME/.enhancd"
-    set -Ux ENHANCD_COMMAND "cd"
+    set -Ux ENHANCD_COMMAND cd
 
     set -Ux ENHANCD_ENABLE_DOUBLE_DOT true
     set -Ux ENHANCD_ENABLE_SINGLE_DOT true
@@ -12,13 +14,13 @@ function __enhancd_install --on-event enhancd_install
 
     set -Ux ENHANCD_ARG_DOUBLE_DOT ".."
     set -Ux ENHANCD_ARG_SINGLE_DOT "."
-    set -Ux ENHANCD_ARG_HYPHEN "-"
+    set -Ux ENHANCD_ARG_HYPHEN -
     set -Ux ENHANCD_ARG_HOME ""
     set -Ux ENHANCD_HYPHEN_NUM 10
     set -Ux ENHANCD_USE_ABBREV false
 
     set -Ux ENHANCD_COMPLETION_DEFAULT 1
-    set -Ux ENHANCD_COMPLETION_BEHAVIOR "default"
+    set -Ux ENHANCD_COMPLETION_BEHAVIOR default
 
     set -Ux ENHANCD_COMPLETION_KEYBIND "^I"
 
@@ -67,4 +69,4 @@ if test -n "$ENHANCD_COMMAND"
 end
 
 # bindings
-bind \ef '_enhancd_complete'
+bind \ef _enhancd_complete
